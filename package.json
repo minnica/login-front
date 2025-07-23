@@ -2,20 +2,23 @@
   "name": "login",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:tailwind": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.generated.css --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lit": "^3.3.1"
+    "@tailwindcss/vite": "^4.1.11",
+    "lit": "^3.3.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
+    "@tailwindcss/postcss": "^4.1.11",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^4.1.11",
+    "vite": "^7.0.4"
   }
 }
