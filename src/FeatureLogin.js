@@ -1,6 +1,7 @@
 import { LitElement, html } from "lit";
 import "./index.css";
 import "@components/button-default/ButtonDefault";
+import "@components/rg-login/RgLogin.js";
 
 export class FeatureLogin extends LitElement {
   static get properties() {
@@ -21,12 +22,7 @@ export class FeatureLogin extends LitElement {
   }
 
   render() {
-    return html`
-      <div class="bg-red-500">
-        <h1>Holis ${this.email}</h1>
-        <button-default></button-default>
-      </div>
-    `;
+    return html` <rg-login></rg-login> `;
   }
 }
 
