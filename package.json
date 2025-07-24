@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "npx prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -16,8 +20,14 @@
     "lit": "^3.3.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.31.0",
     "@tailwindcss/postcss": "^4.1.11",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-lit": "^2.1.1",
+    "globals": "^16.3.0",
     "postcss": "^8.5.6",
+    "prettier": "3.6.2",
     "tailwindcss": "^4.1.11",
     "vite": "^7.0.4"
   }
