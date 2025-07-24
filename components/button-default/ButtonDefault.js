@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html } from 'lit';
 
 export class ButtonDefault extends LitElement {
   static get properties() {
@@ -8,9 +8,10 @@ export class ButtonDefault extends LitElement {
       },
     };
   }
+
   constructor() {
     super();
-    this.test = "Enrique";
+    this.test = 'Enrique';
   }
 
   createRenderRoot() {
@@ -22,4 +23,4 @@ export class ButtonDefault extends LitElement {
   }
 }
 
-customElements.define("button-default", ButtonDefault);
+customElements.define('button-default', ButtonDefault);

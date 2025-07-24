@@ -1,5 +1,5 @@
 /* tailwindcss classnames */
-import { LitElement, html } from "lit";
+import { LitElement, html } from 'lit';
 
 export class RgLogin extends LitElement {
   static get properties() {
@@ -12,7 +12,7 @@ export class RgLogin extends LitElement {
 
   constructor() {
     super();
-    this.test = "Gara";
+    this.test = 'Gara';
   }
 
   createRenderRoot() {
@@ -39,7 +39,7 @@ export class RgLogin extends LitElement {
           </div>
           <div class="mb-3 text-center">
             <button
-              @click="${() => console.log("click")}"
+              @click="${() => console.log('click')}"
               class="rounded-xl bg-black p-2 text-xl w-35 text-white"
             >
               Ingresar
@@ -51,4 +51,4 @@ export class RgLogin extends LitElement {
   }
 }
 
-customElements.define("rg-login", RgLogin);
+customElements.define('rg-login', RgLogin);

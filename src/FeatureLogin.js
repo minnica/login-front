@@ -1,7 +1,7 @@
-import { LitElement, html } from "lit";
-import "./index.css";
-import "@components/button-default/ButtonDefault";
-import "@components/rg-login/RgLogin.js";
+import { LitElement, html } from 'lit';
+import './index.css';
+import '@components/button-default/ButtonDefault';
+import '@components/rg-login/RgLogin.js';
 
 export class FeatureLogin extends LitElement {
   static get properties() {
@@ -13,8 +13,8 @@ export class FeatureLogin extends LitElement {
 
   constructor() {
     super();
-    this.email = "minnica";
-    this.password = "";
+    this.email = 'minnica';
+    this.password = '';
   }
 
   createRenderRoot() {
@@ -26,4 +26,4 @@ export class FeatureLogin extends LitElement {
   }
 }
 
-customElements.define("feature-login", FeatureLogin);
+customElements.define('feature-login', FeatureLogin);
