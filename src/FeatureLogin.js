@@ -49,7 +49,7 @@ export class FeatureLogin extends LitElement {
   successSessionFromDm(e) {
     const { authenticated, user } = e.detail;
     this.authenticated = authenticated;
-    this.user = user.name;
+    this.user = user?.name;
   }
 
   successLogoutFromDm() {
