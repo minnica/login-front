@@ -7,6 +7,8 @@ export class LoginApiDm extends LitElement {
 
   static get properties() {
     return {
+      authenticated: { type: Boolean },
+      user: { type: Object },
       test: {
         type: String,
       },
@@ -15,6 +17,8 @@ export class LoginApiDm extends LitElement {
 
   constructor() {
     super();
+    this.authenticated = false;
+    this.user = null;
     this.test = 'Enrique';
   }
 
@@ -34,14 +38,54 @@ export class LoginApiDm extends LitElement {
 
       if (!response.ok) {
         const error = await response.json();
-        this.dispatchEvent(new CustomEvent('sales-api-dm-fetch-error', { detail: error }));
+        this.dispatchEvent(new CustomEvent('login-api-dm-fetch-error', { detail: error }));
         return;
       }
 
       const data = await response.json();
-      this.dispatchEvent(new CustomEvent('sales-api-dm-fetch', { detail: data }));
+      this.dispatchEvent(new CustomEvent('login-api-dm-fetch', { detail: data }));
     } catch (error) {
-      this.dispatchEvent(new CustomEvent('api-dm-error', { detail: error }));
+      this.dispatchEvent(new CustomEvent('login-api-dm-error', { detail: error }));
+    }
+  }
+
+  async handleLogout() {
+    try {
+      const res = await fetch('http://localhost:3000/keysarCosmetics/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        this.dispatchEvent(new CustomEvent('logout-api-dm-fetch-error', { detail: error }));
+        return;
+      }
+
+      const data = await res.json();
+      this.dispatchEvent(new CustomEvent('logout-api-dm-fetch', { detail: data }));
+    } catch (error) {
+      this.dispatchEvent(new CustomEvent('logout-api-dm-error', { detail: error }));
+    }
+  }
+
+  async handleSession() {
+    try {
+      const res = await fetch('http://localhost:3000/keysarCosmetics/verify-token', {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        this.dispatchEvent(new CustomEvent('session-api-dm-fetch-error', { detail: error }));
+        return;
+      }
+
+      const data = await res.json();
+      this.dispatchEvent(new CustomEvent('session-api-dm-fetch', { detail: data }));
+    } catch (error) {
+      this.dispatchEvent(new CustomEvent('session-api-dm-error', { detail: error }));
     }
   }
 }

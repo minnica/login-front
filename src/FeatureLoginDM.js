@@ -14,6 +14,9 @@ export class FeatureLoginDm extends LitElement {
       dataToRequestLogin: {
         type: Object,
       },
+      dataCheckSession: {
+        type: Object,
+      },
     };
   }
 
@@ -21,6 +24,7 @@ export class FeatureLoginDm extends LitElement {
     super();
     this.test = 'Hola mundo desde FeatureLoginDM';
     this.dataToRequestLogin = {};
+    this.dataCheckSession = {};
   }
 
   _getElement(selector) {
@@ -31,22 +35,46 @@ export class FeatureLoginDm extends LitElement {
     return this._getElement(LoginApiDm.is);
   }
 
-  requestApiHandleLogin(bodyToRequest) {
+  requestHandleLogin(bodyToRequest) {
     this.loginApiDm.handleLogin(bodyToRequest);
   }
 
-  successData(e) {
+  requestHandleSession() {
+    this.loginApiDm.handleSession();
+  }
+
+  requestHandleLogout() {
+    this.loginApiDm.handleLogout();
+  }
+
+  successLogin(e) {
     this.dataToRequestLogin = e.detail;
     this.dispatchEvent(new CustomEvent('set-data-from-dm', { detail: this.dataToRequestLogin }));
   }
 
+  successLogout(e) {
+    this.dispatchEvent(new CustomEvent('logout-success', { detail: e.detail }));
+  }
+
+  successSession(e) {
+    this.dataCheckSession = e.detail;
+    this.dispatchEvent(
+      new CustomEvent('set-data-check-session', { detail: this.dataCheckSession }),
+    );
+  }
+
+  static loginError(e) {
+    console.error('Login error:', e);
+  }
+
   render() {
     return html`
-      <h1>${this.test}</h1>
       <login-api-dm
-        @sales-api-dm-fetch="${e => this.successData(e)}"
-        @sales-api-dm-fetch-error=""
-        @api-dm-error=""
+        @login-api-dm-fetch="${e => this.successLogin(e)}"
+        @login-api-dm-fetch-error="${e => this.loginError(e)}"
+        @login-api-dm-error="${e => this.loginError(e)}"
+        @session-api-dm-fetch="${e => this.successSession(e)}"
+        @logout-api-dm-fetch="${e => this.successLogout(e)}"
       >
       </login-api-dm>
     `;

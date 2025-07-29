@@ -1,22 +1,23 @@
 import { LitElement, html } from 'lit';
 import './index.css';
-import '@components/button-default/ButtonDefault';
 import '@components/rg-login/RgLogin.js';
 import '@components/login-api-dm/LoginApiDm.js';
-import { FeatureLoginDm } from './FeatureLoginDM.js';
+import { FeatureLoginDm } from './FeatureLoginDm.js';
+import './pages/feature-login-success-page/FeatureLoginSuccessPage.js';
 
 export class FeatureLogin extends LitElement {
   static get properties() {
     return {
-      test: { type: String },
+      authenticated: { type: Boolean },
+      user: { type: Object },
       data: { type: Object },
     };
   }
 
   constructor() {
     super();
-    this.email = 'minnica';
-    this.password = '';
+    this.authenticated = false;
+    this.user = null;
     this.data = {};
   }
 
@@ -34,21 +35,42 @@ export class FeatureLogin extends LitElement {
 
   requestLogin(e) {
     this.data = e.detail;
-    this.featureLoginDm.requestApiHandleLogin(this.data);
+    this.featureLoginDm.requestHandleLogin(this.data);
   }
 
-  successDataFromDm(e) {
-    this.test = e.detail;
+  requestLogout() {
+    this.featureLoginDm.requestHandleLogout();
+  }
+
+  successLoginFromDm() {
+    this.featureLoginDm.requestHandleSession();
+  }
+
+  successSessionFromDm(e) {
+    const { authenticated, user } = e.detail;
+    this.authenticated = authenticated;
+    this.user = user.name;
+  }
+
+  successLogoutFromDm() {
+    this.authenticated = false;
+    this.user = null;
   }
 
   render() {
     return html`
-      <rg-login @request-login="${e => this.requestLogin(e)}"> </rg-login>
+      ${this.authenticated
+        ? html`<feature-login-success-page
+            @feature-login-success-page-logout="${this.requestLogout}"
+            .user=${this.user}
+          ></feature-login-success-page>`
+        : html`<rg-login @request-login="${e => this.requestLogin(e)}"> </rg-login>`}
       <feature-login-dm
-        @set-data-from-dm="${e => this.successDataFromDm(e)}"
         .dataToRequestLogin=${this.data}
+        @set-data-from-dm="${this.successLoginFromDm}"
+        @set-data-check-session="${e => this.successSessionFromDm(e)}"
+        @logout-success="${e => this.successLogoutFromDm(e)}"
       ></feature-login-dm>
-      ${this.test}
     `;
   }
 }
