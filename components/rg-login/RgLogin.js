@@ -7,16 +7,35 @@ export class RgLogin extends LitElement {
       test: {
         type: String,
       },
+      email: {
+        type: String,
+      },
+      password: {
+        type: String,
+      },
     };
   }
 
   constructor() {
     super();
     this.test = 'Gara';
+    this.email = '';
+    this.password = '';
   }
 
   createRenderRoot() {
     return this;
+  }
+
+  sendDataToLogin() {
+    this.dispatchEvent(
+      new CustomEvent('request-login', {
+        detail: {
+          email: this.email,
+          password: this.password,
+        },
+      }),
+    );
   }
 
   render() {
@@ -30,17 +49,33 @@ export class RgLogin extends LitElement {
           </div>
           <div class="mb-3 text-center">
             <label class="block text-lg" for="inputEmail">Correo</label>
-            <input class="rounded-xl border-1 text-xl p-1" type="email" />
+            <input
+              autocomplete="off"
+              name="email"
+              class="rounded-xl border-1 text-xl p-1"
+              type="email"
+              .value=${this.email}
+              @input=${e => {
+                this.email = e.target.value;
+              }}
+            />
           </div>
 
           <div class="mb-7 text-center">
             <label class="block text-lg" for="inputPassword">Contraseña</label>
-            <input class="rounded-xl border-1 text-xl p-1" type="password" />
+            <input
+              class="rounded-xl border-1 text-xl p-1"
+              type="password"
+              .value=${this.password}
+              @input=${e => {
+                this.password = e.target.value;
+              }}
+            />
           </div>
           <div class="mb-3 text-center">
             <button
-              @click="${() => console.log('click')}"
               class="rounded-xl bg-black p-2 text-xl w-35 text-white"
+              @click=${this.sendDataToLogin}
             >
               Ingresar
             </button>
