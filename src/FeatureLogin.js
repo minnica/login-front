@@ -1,7 +1,9 @@
 import { LitElement, html } from 'lit';
 import './index.css';
-import '@components/rg-login/RgLogin.js';
-import '@components/login-api-dm/LoginApiDm.js';
+// import '@components/rg-login/RgLogin.js';
+import '../components/rg-login/RgLogin.js';
+// import '@components/login-api-dm/LoginApiDm.js';
+import '../components/login-api-dm/LoginApiDm.js';
 import { FeatureLoginDm } from './FeatureLoginDm.js';
 import './pages/feature-login-success-page/FeatureLoginSuccessPage.js';
 

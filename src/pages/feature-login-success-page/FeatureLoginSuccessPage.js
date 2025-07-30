@@ -1,5 +1,6 @@
 import { LitElement, html } from 'lit';
-import '@components/success-default/SuccessDefault.js';
+// import '@components/success-default/SuccessDefault.js';
+import '../../../components/success-default/SuccessDefault.js';
 
 export class FeatureLoginSuccessPage extends LitElement {
   static get properties() {
