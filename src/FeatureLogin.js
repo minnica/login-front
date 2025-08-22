@@ -6,7 +6,7 @@ import '../components/rg-login/RgLogin.js';
 import '../components/login-api-dm/LoginApiDm.js';
 import { FeatureLoginDm } from './FeatureLoginDm.js';
 import './pages/feature-login-success-page/FeatureLoginSuccessPage.js';
-import '@web-components-features/feature-sales-management-crud/src/FeatureSalesManagementCrud.js';
+// import '@web-components-features/feature-sales-management-crud/src/FeatureSalesManagementCrud.js';
 
 export class FeatureLogin extends LitElement {
   static get properties() {
@@ -53,6 +53,13 @@ export class FeatureLogin extends LitElement {
     const { authenticated, user } = e.detail;
     this.authenticated = authenticated;
     this.user = user?.name;
+    this.dispatchEvent(
+      new CustomEvent('feature-login-success', {
+        detail: { authenticated, user },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   successLogoutFromDm() {
@@ -62,9 +69,7 @@ export class FeatureLogin extends LitElement {
 
   render() {
     return html`
-      ${this.authenticated
-        ? html`<feature-sales-management-crud></feature-sales-management-crud>`
-        : html`<rg-login @request-login="${e => this.requestLogin(e)}"> </rg-login>`}
+      <rg-login @request-login="${e => this.requestLogin(e)}"> </rg-login>
       <feature-login-dm
         .dataToRequestLogin=${this.data}
         @set-data-from-dm="${this.successLoginFromDm}"
