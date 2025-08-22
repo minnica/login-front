@@ -78,8 +78,8 @@ export class FeatureLoginDm extends LitElement {
     return html`
       <login-api-dm
         @login-api-dm-fetch="${e => this.successLogin(e)}"
-        @login-api-dm-fetch-error="${e => this.loginError(e)}"
-        @login-api-dm-error="${e => this.loginError(e)}"
+        @login-api-dm-fetch-error="${e => FeatureLoginDm.loginError(e)}"
+        @login-api-dm-error="${e => FeatureLoginDm.loginError(e)}"
         @session-api-dm-fetch="${e => this.successSession(e)}"
         @logout-api-dm-fetch="${e => this.successLogout(e)}"
       >

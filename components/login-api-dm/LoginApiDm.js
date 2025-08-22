@@ -24,7 +24,7 @@ export class LoginApiDm extends LitElement {
 
   async handleLogin(body) {
     try {
-      const response = await fetch('http://localhost:3000/keysarCosmetics/login', {
+      const response = await fetch('https://keysarcosmetics.fly.dev/keysarCosmetics/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -51,7 +51,7 @@ export class LoginApiDm extends LitElement {
 
   async handleLogout() {
     try {
-      const res = await fetch('http://localhost:3000/keysarCosmetics/logout', {
+      const res = await fetch('https://keysarcosmetics.fly.dev/keysarCosmetics/logout', {
         method: 'POST',
         credentials: 'include',
       });
@@ -71,7 +71,7 @@ export class LoginApiDm extends LitElement {
 
   async handleSession() {
     try {
-      const res = await fetch('http://localhost:3000/keysarCosmetics/verify-token', {
+      const res = await fetch('https://keysarcosmetics.fly.dev/keysarCosmetics/verify-token', {
         method: 'GET',
         credentials: 'include',
       });

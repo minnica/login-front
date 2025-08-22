@@ -6,6 +6,7 @@ import '../components/rg-login/RgLogin.js';
 import '../components/login-api-dm/LoginApiDm.js';
 import { FeatureLoginDm } from './FeatureLoginDm.js';
 import './pages/feature-login-success-page/FeatureLoginSuccessPage.js';
+import '@web-components-features/feature-sales-management-crud/src/FeatureSalesManagementCrud.js';
 
 export class FeatureLogin extends LitElement {
   static get properties() {
@@ -62,10 +63,7 @@ export class FeatureLogin extends LitElement {
   render() {
     return html`
       ${this.authenticated
-        ? html`<feature-login-success-page
-            @feature-login-success-page-logout="${this.requestLogout}"
-            .user=${this.user}
-          ></feature-login-success-page>`
+        ? html`<feature-sales-management-crud></feature-sales-management-crud>`
         : html`<rg-login @request-login="${e => this.requestLogin(e)}"> </rg-login>`}
       <feature-login-dm
         .dataToRequestLogin=${this.data}
