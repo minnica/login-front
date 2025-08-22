@@ -1,12 +1,8 @@
 import { LitElement, html } from 'lit';
 import './index.css';
-// import '@components/rg-login/RgLogin.js';
 import '../components/rg-login/RgLogin.js';
-// import '@components/login-api-dm/LoginApiDm.js';
 import '../components/login-api-dm/LoginApiDm.js';
-import { FeatureLoginDm } from './FeatureLoginDm.js';
-import './pages/feature-login-success-page/FeatureLoginSuccessPage.js';
-// import '@web-components-features/feature-sales-management-crud/src/FeatureSalesManagementCrud.js';
+import './FeatureLoginDM.js';
 
 export class FeatureLogin extends LitElement {
   static get properties() {
@@ -33,7 +29,7 @@ export class FeatureLogin extends LitElement {
   }
 
   get featureLoginDm() {
-    return this._getElement(FeatureLoginDm.is);
+    return this._getElement('feature-login-dm');
   }
 
   requestLogin(e) {

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { LoginApiDm } from '../components/login-api-dm/index.js';
 
-export class FeatureLoginDm extends LitElement {
+export class FeatureLoginDM extends LitElement {
   static get is() {
     return 'feature-login-dm';
   }
@@ -78,8 +78,8 @@ export class FeatureLoginDm extends LitElement {
     return html`
       <login-api-dm
         @login-api-dm-fetch="${e => this.successLogin(e)}"
-        @login-api-dm-fetch-error="${e => FeatureLoginDm.loginError(e)}"
-        @login-api-dm-error="${e => FeatureLoginDm.loginError(e)}"
+        @login-api-dm-fetch-error="${e => FeatureLoginDM.loginError(e)}"
+        @login-api-dm-error="${e => FeatureLoginDM.loginError(e)}"
         @session-api-dm-fetch="${e => this.successSession(e)}"
         @logout-api-dm-fetch="${e => this.successLogout(e)}"
       >
@@ -88,4 +88,4 @@ export class FeatureLoginDm extends LitElement {
   }
 }
 
-customElements.define('feature-login-dm', FeatureLoginDm);
+customElements.define('feature-login-dm', FeatureLoginDM);
