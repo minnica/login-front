@@ -1,5 +1,7 @@
 import { LitElement } from 'lit';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 export class LoginApiDm extends LitElement {
   static get is() {
     return 'login-api-dm';
@@ -24,7 +26,7 @@ export class LoginApiDm extends LitElement {
 
   async handleLogin(body) {
     try {
-      const response = await fetch('https://keysarcosmetics.fly.dev/keysarCosmetics/login', {
+      const response = await fetch(`${API_BASE}/login`, {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -51,7 +53,7 @@ export class LoginApiDm extends LitElement {
 
   async handleLogout() {
     try {
-      const res = await fetch('https://keysarcosmetics.fly.dev/keysarCosmetics/logout', {
+      const res = await fetch(`${API_BASE}/logout`, {
         method: 'POST',
         credentials: 'include',
       });
@@ -71,7 +73,7 @@ export class LoginApiDm extends LitElement {
 
   async handleSession() {
     try {
-      const res = await fetch('https://keysarcosmetics.fly.dev/keysarCosmetics/verify-token', {
+      const res = await fetch(`${API_BASE}/verify-token`, {
         method: 'GET',
         credentials: 'include',
       });
