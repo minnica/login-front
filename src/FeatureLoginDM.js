@@ -27,12 +27,12 @@ export class FeatureLoginDm extends LitElement {
     this.dataCheckSession = {};
   }
 
-  firstUpdated() {
+  /* firstUpdated() {
     const loginApiDm = this.renderRoot.querySelector('login-api-dm');
     if (loginApiDm) {
       loginApiDm.handleSession();
     }
-  }
+  } */
 
   _getElement(selector) {
     return this.renderRoot?.querySelector(selector) ?? this.querySelector(selector);
