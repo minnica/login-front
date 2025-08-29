@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit';
 import './index.css';
 import '../components/rg-login/RgLogin.js';
 import '../components/login-api-dm/LoginApiDm.js';
-import '../components/loading-spinner/LoadingSpinner.js';
+import '../components/rg-spinner/RgSpinner.js';
 import './FeatureLoginDM.js';
 
 export class FeatureLogin extends LitElement {
@@ -103,7 +103,7 @@ export class FeatureLogin extends LitElement {
         @loading-start=${this._incrementLoading}
         @loading-end=${this._decrementLoading}
       ></feature-login-dm>
-      <loading-spinner .isLoading=${this._loadingCount > 0}></loading-spinner>
+      <rg-spinner .isLoading=${this._loadingCount > 0}></rg-spinner>
     `;
   }
 }

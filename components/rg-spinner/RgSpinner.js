@@ -1,6 +1,6 @@
 import { LitElement, html, nothing } from 'lit';
 
-export class LoadingSpinner extends LitElement {
+export class RgSpinner extends LitElement {
   static get properties() {
     return {
       isLoading: { type: Boolean },
@@ -30,4 +30,4 @@ export class LoadingSpinner extends LitElement {
     `;
   }
 }
-customElements.define('loading-spinner', LoadingSpinner);
+customElements.define('rg-spinner', RgSpinner);
