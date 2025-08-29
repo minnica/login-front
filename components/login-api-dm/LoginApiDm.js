@@ -25,6 +25,7 @@ export class LoginApiDm extends LitElement {
   }
 
   async handleLogin(body) {
+    this.dispatchEvent(new CustomEvent('loading-start', { bubbles: true, composed: true }));
     try {
       const response = await fetch(`${API_BASE}/login`, {
         method: 'POST',
@@ -48,10 +49,13 @@ export class LoginApiDm extends LitElement {
       this.dispatchEvent(new CustomEvent('login-api-dm-fetch', { detail: data }));
     } catch (error) {
       this.dispatchEvent(new CustomEvent('login-api-dm-error', { detail: error }));
+    } finally {
+      this.dispatchEvent(new CustomEvent('loading-end', { bubbles: true, composed: true }));
     }
   }
 
   async handleLogout() {
+    this.dispatchEvent(new CustomEvent('loading-start', { bubbles: true, composed: true }));
     try {
       const res = await fetch(`${API_BASE}/logout`, {
         method: 'POST',
@@ -68,10 +72,13 @@ export class LoginApiDm extends LitElement {
       this.dispatchEvent(new CustomEvent('logout-api-dm-fetch', { detail: data }));
     } catch (error) {
       this.dispatchEvent(new CustomEvent('logout-api-dm-error', { detail: error }));
+    } finally {
+      this.dispatchEvent(new CustomEvent('loading-end', { bubbles: true, composed: true }));
     }
   }
 
   async handleSession() {
+    this.dispatchEvent(new CustomEvent('loading-start', { bubbles: true, composed: true }));
     try {
       const res = await fetch(`${API_BASE}/verify-token`, {
         method: 'GET',
@@ -88,6 +95,8 @@ export class LoginApiDm extends LitElement {
       this.dispatchEvent(new CustomEvent('session-api-dm-fetch', { detail: data }));
     } catch (error) {
       this.dispatchEvent(new CustomEvent('session-api-dm-error', { detail: error }));
+    } finally {
+      this.dispatchEvent(new CustomEvent('loading-end', { bubbles: true, composed: true }));
     }
   }
 }

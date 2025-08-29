@@ -2,6 +2,7 @@ import { LitElement, html } from 'lit';
 import './index.css';
 import '../components/rg-login/RgLogin.js';
 import '../components/login-api-dm/LoginApiDm.js';
+import '../components/loading-spinner/LoadingSpinner.js';
 import './FeatureLoginDM.js';
 
 export class FeatureLogin extends LitElement {
@@ -10,6 +11,15 @@ export class FeatureLogin extends LitElement {
       authenticated: { type: Boolean },
       user: { type: Object },
       data: { type: Object },
+      /**
+       * Loading counter for tracking concurrent requests.
+       * @type {Number}
+       * @default 0
+       * @private
+       */
+      _loadingCount: {
+        type: Number,
+      },
     };
   }
 
@@ -18,6 +28,7 @@ export class FeatureLogin extends LitElement {
     this.authenticated = false;
     this.user = null;
     this.data = {};
+    this._loadingCount = 0;
   }
 
   createRenderRoot() {
@@ -63,6 +74,24 @@ export class FeatureLogin extends LitElement {
     this.user = null;
   }
 
+  /**
+   * Increments the global loading counter.
+   * @private
+   */
+  _incrementLoading() {
+    this._loadingCount += 1;
+    this.requestUpdate();
+  }
+
+  /**
+   * Decrements the global loading counter.
+   * @private
+   */
+  _decrementLoading() {
+    this._loadingCount = Math.max(0, this._loadingCount - 1);
+    this.requestUpdate();
+  }
+
   render() {
     return html`
       <rg-login @request-login="${e => this.requestLogin(e)}"> </rg-login>
@@ -71,7 +100,10 @@ export class FeatureLogin extends LitElement {
         @set-data-from-dm="${this.successLoginFromDm}"
         @set-data-check-session="${e => this.successSessionFromDm(e)}"
         @logout-success="${e => this.successLogoutFromDm(e)}"
+        @loading-start=${this._incrementLoading}
+        @loading-end=${this._decrementLoading}
       ></feature-login-dm>
+      <loading-spinner .isLoading=${this._loadingCount > 0}></loading-spinner>
     `;
   }
 }
